@@ -20,7 +20,7 @@ default = ["std"]
 std = ["dpi/std", "keyboard-types/std", "kurbo?/std", "serde?/std"]
 libm = ["kurbo?/libm"]
 kurbo = ["dep:kurbo"]
-serde = ["dep:serde", "dpi/serde"]
+serde = ["dep:serde", "dpi/serde", "keyboard-types/serde"]
 
 [dependencies]
 dpi = { workspace = true }
