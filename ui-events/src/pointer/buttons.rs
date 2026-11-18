@@ -93,6 +93,12 @@ impl PointerButtons {
         Self(0)
     }
 
+    /// Get the underlying bits value.
+    #[inline]
+    pub fn bits(&self) -> u32 {
+        self.0
+    }
+
     /// Add the `button` to the set.
     #[inline]
     pub fn insert(&mut self, button: PointerButton) {
