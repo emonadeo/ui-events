@@ -156,11 +156,11 @@ const NONZERO_VARIANTS: [PointerButton; 32] = [
 /// Prefer [`state_from_pointer_event`] when handling W3C Pointer Events,
 /// as it includes richer data (pressure, width/height, etc.).
 ///
-/// - Coordinates use `clientX/Y` scaled by `scale_factor` to approximate physical pixels.
+/// - Coordinates use `offsetX/Y` scaled by `scale_factor` to approximate physical pixels.
 /// - Pressure is 0.5 when any button is down, else 0.0.
 pub fn state_from_mouse_event(e: &MouseEvent, scale_factor: f64) -> PointerState {
-    let css_x = e.client_x() as f64;
-    let css_y = e.client_y() as f64;
+    let css_x = e.offset_x() as f64;
+    let css_y = e.offset_y() as f64;
     let buttons = from_web_buttons_mask(e.buttons());
     let pressure = if buttons.is_empty() { 0.0 } else { 0.5 };
     let time_ns = ms_to_ns_u64(e.time_stamp());
@@ -375,7 +375,7 @@ fn pointer_orientation_from_tilt_degrees(tilt_x_deg: f32, tilt_y_deg: f32) -> Po
 
 /// Build a [`PointerState`] from a DOM [`web_sys::PointerEvent`].
 ///
-/// - Coordinates use `clientX/Y` scaled by `scale_factor` to approximate
+/// - Coordinates use `offsetX/Y` scaled by `scale_factor` to approximate
 ///   physical pixels.
 /// - Uses the event's reported `pressure`, `tangentialPressure`, `width/height`, and
 ///   stylus orientation where available (preferring `altitudeAngle`/`azimuthAngle`,
@@ -383,8 +383,8 @@ fn pointer_orientation_from_tilt_degrees(tilt_x_deg: f32, tilt_y_deg: f32) -> Po
 /// - Pointer Events `twist` is not currently mapped (there is no corresponding field in
 ///   `ui-events`).
 pub fn state_from_pointer_event(e: &WebPointerEvent, scale_factor: f64) -> PointerState {
-    let css_x = e.client_x() as f64;
-    let css_y = e.client_y() as f64;
+    let css_x = e.offset_x() as f64;
+    let css_y = e.offset_y() as f64;
     let buttons = from_web_buttons_mask(e.buttons());
     let pressure = e.pressure();
     let tangential_pressure = e.tangential_pressure();

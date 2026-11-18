@@ -37,7 +37,7 @@
 //!
 //! ## Notes
 //!
-//! - Positions use `clientX` / `clientY` scaled by `Options::scale_factor`. Pass the
+//! - Positions use `offsetX` / `offsetY` scaled by `Options::scale_factor`. Pass the
 //!   current device-pixel-ratio for physical pixels.
 //! - **Element-local coordinates (recipe):** DOM pointer coordinates are reported in viewport
 //!   space even when you register the listener on an element. For canvas/SVG apps you often
