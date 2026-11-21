@@ -20,7 +20,9 @@ default = ["std"]
 std = ["dpi/std", "keyboard-types/std", "kurbo?/std", "serde?/std"]
 libm = ["kurbo?/libm"]
 kurbo = ["dep:kurbo"]
-serde = ["dep:serde", "dpi/serde", "keyboard-types/serde"]
+# Needs std, because `dpi/serde` always compiles with default features
+# See <https://github.com/rust-windowing/winit/blob/v0.30.13/dpi/Cargo.toml>
+serde = ["std", "dep:serde", "dpi/serde", "keyboard-types/serde"]
 
 [dependencies]
 dpi = { workspace = true }
